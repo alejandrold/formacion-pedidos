@@ -17,7 +17,7 @@ const RestaurantList = (props) => {
     const [menus, setMenus] = useState([]);
 
     useEffect(() => {
-        getMenus().then(menusResponse => {
+        getMenus(0).then(menusResponse => {
             setMenus(menusResponse);
             setLoading(false);
         });
@@ -26,7 +26,7 @@ const RestaurantList = (props) => {
     useEffect(() => {
         if(reload){
             setMenus([]);
-            getMenus().then(menusResponse => {
+            getMenus(0).then(menusResponse => {
                 setMenus(menusResponse);
                 setLoading(false);
                 setReload(false);
@@ -62,6 +62,6 @@ export default connect(
         menus: store.restaurantList.menus
     }),
     dispatch => ({
-        getMenus : (start) => dispatch(getmenus(start))
+        getMenus : (start) => dispatch(getMenus(start))
     })
 )(RestaurantList);
