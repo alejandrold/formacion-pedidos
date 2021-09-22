@@ -1,0 +1,24 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+}
+
+.contenido{
+    height: 90%;
+    background-color: #333;
+}
+
+.btn-reload{
+    height: 35px;
+    text-align: center;
+    background-color: teal;
+}
+
+.btn-reload button{
+    height: 35px;
+    width: 70px;
+    background-color: #fff;
+    font-weight: bold;
+    border-color: #333;
+}

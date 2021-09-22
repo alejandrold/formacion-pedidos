@@ -1,0 +1,14 @@
+.login{
+    
+    margin-top: 50%;
+}
+
+.login-title{
+    text-align: center;
+    background-color: teal;
+    color: #fff;
+}
+
+.inputs{
+    margin-left: 4px;
+}

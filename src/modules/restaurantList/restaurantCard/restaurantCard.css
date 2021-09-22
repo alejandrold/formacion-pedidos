@@ -1,0 +1,54 @@
+.tarjeta{
+    height: 45%;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.carrusel{
+    margin-top: 30px;
+    height: 40px;
+    border-bottom: 1px solid #7f7f7f;
+    border-top: 1px solid #7f7f7f;
+}
+
+.pedido-container{
+    height: 50%;
+}
+
+.info-pedido{
+    display: flex;
+    height: 85%;
+}
+
+.listado{
+    width: 50%;
+    border-right: 1px solid #7f7f7f;
+}
+
+.restaurante{
+    width: 50%;
+    display: block;
+}
+
+.btn{
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #7f7f7f;
+}
+
+.btn button{
+    height: 100%;
+    width: 100%;
+    background-color: goldenrod;
+    font-weight: bold;
+    border-color: #7f7f7f;
+}
+
+.pedido{
+    height: 80%;
+}
+
+.estado{
+    text-align: center;
+}
