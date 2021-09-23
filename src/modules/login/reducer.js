@@ -1,6 +1,7 @@
 import {
   USER_LOGIN_REQUEST,
-  USER_LOGIN_RESPONSE
+  USER_LOGIN_RESPONSE,
+  LOGOUT
 } from './actions';
 
 const initialState = {
@@ -21,6 +22,11 @@ const login = (state = initialState, action) => {
           ...state,
           loading : false,
           userInfo : action.userInfo
+        };
+    case LOGOUT:
+        return {
+          userInfo: null,
+          loading: false
         };
     default:
       return state;

@@ -1,56 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Header from '../../components/header/Header';
 import { RestaurantCard } from './restaurantCard/RestaurantCard';
 import { getMenus } from './actions';
 import './restaurantList.css';
 import { connect } from 'react-redux';
 
+const ITEMS_PER_PAGE = 5;
+
 const RestaurantList = (props) => {
 
     const {
-        userInfo,
-        loadMenus
+        loadMenus,
+        menus,
+        loading
     } = props;
 
-    const [loading, setLoading] = useState(true);
-    const [reload, setReload] = useState(false);
-    const [menus, setMenus] = useState([]);
+    const restaurantsRef = useRef();
 
     useEffect(() => {
-        getMenus(0).then(menusResponse => {
-            setMenus(menusResponse);
-            setLoading(false);
-        });
+        loadMenus(0, ITEMS_PER_PAGE);
     }, []);
 
-    useEffect(() => {
-        if(reload){
-            setMenus([]);
-            getMenus(0).then(menusResponse => {
-                setMenus(menusResponse);
-                setLoading(false);
-                setReload(false);
-            });
+    if (restaurantsRef.current) {
+        restaurantsRef.current.onscroll = () => {
+          const heightToScroll = restaurantsRef.current.scrollHeight - (restaurantsRef.current.offsetHeight + restaurantsRef.current.scrollTop);
+    
+          if (heightToScroll < restaurantsRef.current.offsetHeight) {
+            loadMenus((menus.currentPage + 1) * ITEMS_PER_PAGE, ITEMS_PER_PAGE);
+          }
         }
-    }, [reload]);
-
-    console.log("Render RestaurantList: ", reload)
+      }
     
     return(
         <>
             <Header />
-            <div className="btn-reload">
-                <button onClick={() => setReload(true)}>Reload</button>
-            </div>
-            
             <div className="contenido">
-                {loading && 
+                {loading && menus.items.length > 0 &&
                     <div className="loading">Cargando</div>
                 }
-                {!loading && menus.map(menuItem => (
-                    <RestaurantCard key={menuItem.id} restaurant={menuItem} />
+                {!loading && menus.items.map(menuItem => (
+                    <RestaurantCard restaurant={menuItem} key={menuItem.id} />
                 ))}
-                
             </div>
         </>
     )
@@ -62,6 +52,6 @@ export default connect(
         menus: store.restaurantList.menus
     }),
     dispatch => ({
-        getMenus : (start) => dispatch(getMenus(start))
+        loadMenus : (start, count) => dispatch(getMenus(start, count))
     })
 )(RestaurantList);

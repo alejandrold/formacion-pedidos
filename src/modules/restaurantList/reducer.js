@@ -4,11 +4,15 @@ import {
   } from './actions';
   
   const initialState = {
-    menus: [],
+    menus: {
+        currentPage : 0,
+        items : [],
+        totalItems : 0
+    },
     loading: false
   };
   
-  const login = (state = initialState, action) => {
+  const restaurantsList = (state = initialState, action) => {
     switch (action.type) {
       case GET_MENUS_REQ:
         return {
@@ -17,13 +21,17 @@ import {
         };
       case GET_MENUS_RESP:
         return {
-            ...state,
-            loading : false,
-            menus : action.menus
-          };
+          ...state,
+          loading : false,
+          menus :  {
+              currentPage : action.menus.start / action.menus.limit,
+              items : state.menus.items.concat(action.menus.results),
+              totalItems : action.menus.count
+          }
+        };
       default:
         return state;
     }
   };
   
-  export default login;
+  export default restaurantsList;

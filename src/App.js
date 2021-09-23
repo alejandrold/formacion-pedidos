@@ -18,10 +18,10 @@ function App(props) {
     <Router>
       <Switch>
         <Route exact={true} path="/">
-          {userInfo == null &&
+          {!userInfo &&
             <Login />
           }
-          {userInfo != null &&
+          {userInfo &&
            <Redirect to={{pathname: '/home'}} />
           }
         </Route>

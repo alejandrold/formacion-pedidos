@@ -2,6 +2,7 @@ import { Config } from "../../config/Config";
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_RESPONSE = 'USER_LOGIN_RESPONSE';
+export const LOGOUT = 'LOGOUT';
 
 export const loginUser = (login, password) => {
     return dispatch => {
@@ -24,5 +25,12 @@ export const loginUser = (login, password) => {
                 userInfo
             });
         });
+    }
+}
+
+export const logout = () => {
+    return {
+        type: LOGOUT,
+        info: 'logout'
     }
 }
